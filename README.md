@@ -1,25 +1,25 @@
 # OboardUsuario
 Link  youtube: https://youtu.be/ATIiv8vhcF4
 
-## Criar tabela e banco
+## Criar Banco de Dados e Tabela
 
------------------------------------------------
+```sql
+-- Criar Banco de Dados e Tabela
 
-use [master]
-go
-
-CREATE DATABASE onboard_user
+USE [master];
 GO
 
-use onboard_user
-go
+CREATE DATABASE onboard_user;
+GO
+
+USE onboard_user;
+GO
 
 CREATE TABLE [Users] (
-    [Id] [int] IDENTITY(1, 1) NOT NULL
-    , [DataCriacao] DATETIME NOT NULL
-    , [Name] [nvarchar](100) NOT NULL
-    , [Email] [nvarchar](100) NOT NULL
-    , [Phone] [nvarchar](50) NOT NULL
-    ) ON [PRIMARY]
-
---------------------------------------------------
+    [Id] INT IDENTITY(1, 1) NOT NULL,
+    [DataCriacao] DATETIME NOT NULL,
+    [Name] NVARCHAR(100) NOT NULL,
+    [Email] NVARCHAR(100) NOT NULL,
+    [Phone] NVARCHAR(50) NOT NULL
+) ON [PRIMARY];
+GO
