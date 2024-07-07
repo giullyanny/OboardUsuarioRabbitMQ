@@ -1,0 +1,54 @@
+version: "3.8"
+
+services:
+  api-onboard-user-publisher:
+    container_name: api-onboard-user-publisher
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - 80:80
+      - 8080:8080
+      - 443:443
+      - 5269:5269
+    volumes:
+      - ./workspaces:/workspaces
+    networks:
+      - rede_local
+    depends_on:
+      - rabbitmq
+      - mssql
+
+  rabbitmq:
+    image: rabbitmq:3.13-management
+    container_name: rabbitmq
+    ports:
+      - 5552:5552   # porta adicional especificada
+      - 5672:5672   # porta para o protocolo AMQP
+      - 15672:15672 # porta para a interface de gerenciamento
+    environment:
+      - RABBITMQ_SERVER_ADDITIONAL_ERL_ARGS=-rabbitmq_stream advertised_host localhost
+    networks:
+      - rede_local
+
+  mssql:
+    image: mcr.microsoft.com/mssql/server:2022-latest
+    container_name: sqlserver2022
+    hostname: sqlserver2022
+    user: root
+    environment:
+      MSSQL_SA_PASSWORD: 'COLOQUE_A_SENHA_QUE_DESEJA'
+      ACCEPT_EULA: 'Y'
+      MSSQL_COLLATION: "SQL_Latin1_General_CP1_CI_AS"
+    ports:
+      - 2022:1433
+    volumes:
+      - /home/eduardo/_2022mssql/data:/var/opt/mssql/data
+      - /home/eduardo/_2022mssql/BKPs:/var/opt/mssql/BKPs
+    networks:
+      - rede_local
+
+networks:
+  rede_local:
+    external: true
+    driver: bridge
