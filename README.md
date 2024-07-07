@@ -1,7 +1,9 @@
 # OboardUsuario
-Link youtube: https://youtu.be/ATIiv8vhcF4
+Link  youtube: https://youtu.be/ATIiv8vhcF4
 
-##Criar tabela e banco
+## Criar tabela e banco
+
+-----------------------------------------------
 use [master]
 go
 
@@ -18,4 +20,4 @@ CREATE TABLE [Users] (
     , [Email] [nvarchar](100) NOT NULL
     , [Phone] [nvarchar](50) NOT NULL
     ) ON [PRIMARY]
-
+--------------------------------------------------
